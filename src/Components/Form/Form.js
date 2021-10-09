@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-
+import s from './Form.module.css'
 
 class Input extends Component {
     state = {
@@ -8,8 +7,12 @@ class Input extends Component {
       number: '',
     }
 
-    handleInput = e => {
-        this.setState({name: e.currentTarget.value})
+  handleInput = e => {
+    const {value, name} = e.target;
+
+    this.setState({
+        [name]: value,
+      })
     }
 
     handleSubmit = e => {
@@ -25,9 +28,9 @@ class Input extends Component {
     }
 
     render() {
-        return <div>
+        return <div className={s.form}>
             <form onSubmit={this.handleSubmit}>
-              <label>Имя
+              <label className={s.label}>Name
                 <input
                   type="text"
                   name="name"
@@ -36,18 +39,24 @@ class Input extends Component {
                   title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                   onChange={this.handleInput}
                   required
+                  placeholder='add name...'
+                  className={s.input}
               />
               </label>
-            <label>Телефон
+            <label className={s.label}>Phone number
               <input
                 type="tel"
                 name="number"
+                value={this.state.number}
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                 title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+                onChange={this.handleInput}
                 required
+                placeholder='add number...'
+                className={s.input}
               />
             </label>
-              <button type="submit">Добавить</button>
+              <button type="submit" className={s.button} title='Добавить новый контакт'>Add contact</button>
           </form>
         </div>
     }

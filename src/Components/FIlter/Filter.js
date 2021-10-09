@@ -1,26 +1,21 @@
-import React,{ Component } from "react";
+import React from 'react';
+import s from './Filter.module.css';
 
-
-class Filter extends Component {
-    state = {
-    filter: '',
-    }
-
-    handleInput = e => {
-        this.setState({filter: e.currentTarget.value})
-    }
-
-    render() {
-    return (
-      <label>Найти контакт
+const Filter = ({ onChange, value }) => {
+  return (
+    <div className={s.wrapper}>
+      <label className={s.label}>Find contact
         <input
           type="text"
           name="name"
-          title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-          onChange={this.handleInput}
+          value={value}
+          onChange={onChange}
+          className={s.input}
+          placeholder='find name...'
         />
-      </label>)    
+      </label>
+    </div>
+      )    
   };
-}
 
 export default Filter;
